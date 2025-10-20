@@ -1,0 +1,212 @@
+:root {
+  color-scheme: light dark;
+  --primary: #2a4d69;
+  --secondary: #4b86b4;
+  --accent: #adcbe3;
+  --text: #1a1a1a;
+  --bg: #f6f7fb;
+  --card-bg: #ffffff;
+  --border: #d0d7e2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.site-header {
+  background: var(--primary);
+  color: #fff;
+  padding: 1.5rem 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.site-header nav {
+  margin-top: 0.75rem;
+}
+
+.site-header nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 1rem;
+  font-weight: 600;
+}
+
+.site-header nav a:hover,
+.site-header nav a:focus {
+  text-decoration: underline;
+}
+
+.container {
+  width: min(1100px, 90vw);
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(32, 33, 36, 0.05);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+.document-form .field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.document-form label {
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.document-form input,
+.document-form textarea,
+.filters input,
+.filters select {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+.document-form button,
+.filters button {
+  background: var(--secondary);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.document-form button:hover,
+.filters button:hover,
+.document-form button:focus,
+.filters button:focus {
+  background: var(--primary);
+}
+
+.filters {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-bottom: 1.5rem;
+}
+
+.document-table-wrapper {
+  overflow-x: auto;
+}
+
+.document-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.document-table th,
+.document-table td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.document-table a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.document-table a:hover,
+.document-table a:focus {
+  text-decoration: underline;
+}
+
+.flash-messages {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.flash-messages li {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.flash-success {
+  background: #e3fcec;
+  color: #24613a;
+  border: 1px solid #7dd89d;
+}
+
+.flash-error {
+  background: #fdecea;
+  color: #6d1b1b;
+  border: 1px solid #f5a9a8;
+}
+
+.empty {
+  color: #5f6368;
+  font-style: italic;
+}
+
+.year-summary {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(173, 203, 227, 0.15);
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: #fff;
+  background: var(--primary);
+  margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+  .document-table thead {
+    display: none;
+  }
+
+  .document-table tr {
+    display: block;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+
+  .document-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem;
+  }
+
+  .document-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    margin-right: 1rem;
+  }
+}
