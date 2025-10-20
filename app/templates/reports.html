@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Reportes | Gestión documental{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Resumen anual de documentos</h2>
+  {% if yearly_totals %}
+    <div class="document-table-wrapper">
+      <table class="document-table">
+        <thead>
+          <tr>
+            <th>Año</th>
+            <th>Total de documentos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in yearly_totals %}
+            <tr>
+              <td data-label="Año">{{ row.year }}</td>
+              <td data-label="Total de documentos">{{ row.total }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">Aún no hay documentos registrados.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2>Categorías por año</h2>
+  {% if category_breakdown %}
+    {% for year, categories in category_breakdown.items() %}
+      <article class="year-summary">
+        <h3>{{ year }}</h3>
+        <ul>
+          {% for entry in categories %}
+            <li><strong>{{ entry.category }}:</strong> {{ entry.total }} documento(s)</li>
+          {% endfor %}
+        </ul>
+      </article>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No hay información para mostrar todavía.</p>
+  {% endif %}
+</section>
+{% endblock %}
