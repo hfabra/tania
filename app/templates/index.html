@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Documentos | Gestión documental{% endblock %}
+{% block content %}
+<section class="card">
+  <h2>Registrar documento</h2>
+  <form class="document-form" method="post" enctype="multipart/form-data">
+    <div class="field">
+      <label for="title">Nombre</label>
+      <input type="text" id="title" name="title" required>
+    </div>
+    <div class="field">
+      <label for="description">Descripción</label>
+      <textarea id="description" name="description" rows="3" required></textarea>
+    </div>
+    <div class="field">
+      <label for="category">Categoría</label>
+      <input type="text" id="category" name="category" placeholder="Ej. Actas, Informes" required>
+    </div>
+    <div class="field">
+      <label for="upload_date">Fecha</label>
+      <input type="date" id="upload_date" name="upload_date" required>
+    </div>
+    <div class="field">
+      <label for="file">Archivo</label>
+      <input type="file" id="file" name="file" accept="application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*" required>
+    </div>
+    <button type="submit">Guardar documento</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Buscar documentos</h2>
+  <form class="filters" method="get">
+    <input type="search" name="q" placeholder="Buscar por nombre, descripción o archivo" value="{{ query }}">
+    <select name="category">
+      <option value="">Todas las categorías</option>
+      {% for category in categories %}
+        <option value="{{ category }}" {% if category == category_filter %}selected{% endif %}>{{ category }}</option>
+      {% endfor %}
+    </select>
+    <select name="year">
+      <option value="">Todos los años</option>
+      {% for year in years %}
+        <option value="{{ year }}" {% if year == year_filter %}selected{% endif %}>{{ year }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Filtrar</button>
+  </form>
+
+  {% if documents %}
+    <div class="document-table-wrapper">
+      <table class="document-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Fecha</th>
+            <th>Archivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for document in documents %}
+            <tr>
+              <td data-label="Nombre">{{ document.title }}</td>
+              <td data-label="Descripción">{{ document.description }}</td>
+              <td data-label="Categoría">{{ document.category }}</td>
+              <td data-label="Fecha">{{ document.upload_date.strftime('%d/%m/%Y') }}</td>
+              <td data-label="Archivo"><a href="{{ url_for('main.download', document_id=document.id) }}">Descargar</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="empty">No hay documentos registrados con los filtros actuales.</p>
+  {% endif %}
+</section>
+{% endblock %}
